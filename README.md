@@ -1,6 +1,6 @@
 # Envi-Rover
 
-![Envi-Rover Screenshot](Images/rover.png)
+![Envi-Rover Screenshot](Images/rover.jpg)
 
 ## Description:
 The **Envi-Rover** is a LoRa-based, long-range, remotely operated robotic system designed to monitor environmental parameters and detect obstacles in hazardous or inaccessible areas. The rover is controlled using `W`, `A`, `S`, `D` keys for movement and `X` to stop. Data from the rover is continuously received at the controller, allowing for real-time monitoring and control.
