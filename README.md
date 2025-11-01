@@ -1,6 +1,6 @@
 # Envi-Rover
 
-![Envi-Rover Screenshot](images/rover.png)
+![Envi-Rover Screenshot](Images/rover.png)
 
 ## Description:
 The **Envi-Rover** is a LoRa-based, long-range, remotely operated robotic system designed to monitor environmental parameters and detect obstacles in hazardous or inaccessible areas. The rover is controlled using `W`, `A`, `S`, `D` keys for movement and `X` to stop. Data from the rover is continuously received at the controller, allowing for real-time monitoring and control.
@@ -9,7 +9,7 @@ It integrates [ESP32](https://www.espressif.com/en/products/socs/esp32) with var
 
 🎥 **Rover in Action:**  
 *(You can replace this sample GIF with yours)*  
-![Envi-Rover Demo](images/ani.gif)
+![Envi-Rover Demo](Images/ani.gif)
 
 ---
 
@@ -40,41 +40,41 @@ Below is the system flow for **data transmission and control** between the **Rov
 
 *(Insert your flowchart image here)*  
 Example:  
-![Envi-Rover Flowchart](images/flow_chart.png)
+![Envi-Rover Flowchart](Images/flow_chart.png)
 
 ---
 
 ## 📷 Images & Visuals
 
-A collection of images showcasing the **Envi-Rover**, **Blynk Dashboard**, and **System Components**.
+A collection of Images showcasing the **Envi-Rover**, **Blynk Dashboard**, and **System Components**.
 
 ### 🚘 Rover Setup
-![Rover Setup](images/rover_2.png)  
+![Rover Setup](Images/rover_2.png)  
 *The complete Envi-Rover unit with sensors, LoRa module, and power system.*
 
 ---
 
 ### 🌐 Blynk Dashboard (Web)
-![Blynk Web Dashboard](images/blynk_desktop.png)  
+![Blynk Web Dashboard](Images/blynk_desktop.png)  
 *Blynk web dashboard showing real-time sensor data visualization.*
 
 ---
 
 ### 📱 Blynk Dashboard (Mobile)
-![Blynk Mobile 1](images/blynk_mobile1.png)
-![Blynk Mobile 2](images/blynk_mobile2.png)  
+![Blynk Mobile 1](Images/blynk_mobile1.png)
+![Blynk Mobile 2](Images/blynk_mobile2.png)  
 *Blynk mobile app screenshots displaying live readings.*
 
 ---
 
 ### 📊 Sensor Readings
-![Blynk Readings](images/readings.png)  
+![Blynk Readings](Images/readings.png)  
 *Example of temperature, humidity, and gas concentration readings from the rover.*
 
 ---
 
 ### ⚙️ Arduino Setup
-![Arduino Wiring 1](images/arduino.png)
+![Arduino Wiring 1](Images/arduino.png)
 *Arduino IDE programming and hardware setup with ESP32 and LoRa modules.*
 
 ---
