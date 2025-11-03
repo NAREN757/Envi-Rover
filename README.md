@@ -1,4 +1,4 @@
-# Envi-Rover
+## Envi-Rover
 
 ![Envi-Rover Screenshot](Images/rover_main_2.jpg)
 
