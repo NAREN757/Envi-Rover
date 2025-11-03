@@ -3,7 +3,7 @@
 ![Envi-Rover Screenshot](Images/rover_main_2.jpg)
 
 ## Description:
-The **Envi-Rover** is a LoRa-based, long-range, remotely operated robotic system designed to monitor environmental parameters and detect obstacles in hazardous or inaccessible areas. The rover is controlled using `W`, `A`, `S`, `D` keys for movement and `X` to stop it completely. Data from the rover is continuously received at the controller, allowing for real-time monitoring and control.
+The **Envi-Rover** is a LoRa-based, long-range, remotely operated robotic system designed to monitor environmental parameters and detect obstacles in hazardous or inaccessible areas. The rover is controlled using `W`, `A`, `S`, `D` keys for movement and `X` to stop. Data from the rover is continuously received at the controller, allowing for real-time monitoring and control remotely without any hastle.
 
 It integrates [ESP32](https://www.espressif.com/en/products/socs/esp32) with various sensors (temperature, humidity, illumination, and gas detection) and a LoRa communication module to transmit data over long distances. Users can access the data via [Blynk](https://blynk.io/) on mobile or PC.
 
