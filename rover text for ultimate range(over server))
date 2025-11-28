@@ -1,0 +1,104 @@
+//create your blynk IOT account and get following ID's
+#define BLYNK_TEMPLATE_ID "TMPL3y3t-eJJp"
+#define BLYNK_TEMPLATE_NAME "ENVIROVER rover"
+#define BLYNK_AUTH_TOKEN    "EiQbw2X6xTa-dHApwvAp1wu41bY8-KrO" // Rover Auth Token
+
+#define BLYNK_PRINT Serial
+#include <WiFi.h>
+#include <BlynkSimpleEsp32.h>
+
+// ---- WiFi credentials ---- add your wifi name and password
+char ssid[] = "AirFiber-Peek0i";
+char pass[] = "quien3neinoh0Fah";
+
+// ---- Motor driver pins ----
+#define DIR1 14
+#define PWM1 27
+#define DIR2 12
+#define PWM2 26
+
+int speedVal = 200;
+
+// ---- LDR, MQ2, Ultrasonic ----
+#define LDR_A0 33
+#define MQ2_A0 34
+#define TRIG_PIN 4
+#define ECHO_PIN 2
+
+long duration;
+float distance;
+
+// ---- Motor control ----
+void forward()  { digitalWrite(DIR1, HIGH); digitalWrite(DIR2, HIGH); ledcWrite(PWM1, speedVal); ledcWrite(PWM2, speedVal); }
+void backward() { digitalWrite(DIR1, LOW);  digitalWrite(DIR2, LOW);  ledcWrite(PWM1, speedVal); ledcWrite(PWM2, speedVal); }
+void left()     { digitalWrite(DIR1, LOW);  digitalWrite(DIR2, HIGH); ledcWrite(PWM1, speedVal); ledcWrite(PWM2, speedVal); }
+void right()    { digitalWrite(DIR1, HIGH); digitalWrite(DIR2, LOW);  ledcWrite(PWM1, speedVal); ledcWrite(PWM2, speedVal); }
+void stopMotors(){ ledcWrite(PWM1, 0); ledcWrite(PWM2, 0); }
+
+// ---- Ultrasonic ----
+float readDistanceCM() {
+  digitalWrite(TRIG_PIN, LOW);
+  delayMicroseconds(2);
+  digitalWrite(TRIG_PIN, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG_PIN, LOW);
+  duration = pulseIn(ECHO_PIN, HIGH, 25000);
+  if(duration==0) return -1;
+  return duration/58.2;
+}
+// ---- BLYNK Commands ----
+BLYNK_WRITE(V10) { if(param.asInt()) forward();  else stopMotors(); }
+BLYNK_WRITE(V11) { if(param.asInt()) backward(); else stopMotors(); }
+BLYNK_WRITE(V12) { if(param.asInt()) left();     else stopMotors(); }
+BLYNK_WRITE(V13) { if(param.asInt()) right();    else stopMotors(); }
+
+// ---- Speed Control ----
+BLYNK_WRITE(V6) {
+  speedVal = param.asInt();
+  Serial.printf("⚙ Speed changed to: %d\n", speedVal);
+}
+
+
+// ---- Telemetry ----
+unsigned long lastTelemetry = 0;
+const long telemetryInterval = 5000;
+
+void setup() {
+  Serial.begin(115200);
+
+  // Motor pins
+  pinMode(DIR1, OUTPUT);
+  pinMode(DIR2, OUTPUT);
+  ledcAttach(PWM1, 5000, 8);
+  ledcAttach(PWM2, 5000, 8);
+  stopMotors();
+
+
+  // Sensors
+  pinMode(LDR_A0, INPUT);
+  pinMode(MQ2_A0, INPUT);
+  pinMode(TRIG_PIN, OUTPUT);
+  pinMode(ECHO_PIN, INPUT);
+
+  // Connect to Blynk
+  Blynk.begin(BLYNK_AUTH_TOKEN, ssid, pass);
+}
+
+void loop() {
+  Blynk.run();
+
+  if(millis() - lastTelemetry > telemetryInterval){
+    lastTelemetry = millis();
+
+    int ldrRaw = analogRead(LDR_A0);
+    float ldrPercent = map(ldrRaw, 4095, 0, 0, 100);
+    int mq2Raw = analogRead(MQ2_A0);
+    float dist = readDistanceCM();
+
+    Blynk.virtualWrite(V2, ldrPercent);
+    Blynk.virtualWrite(V3, mq2Raw);
+    Blynk.virtualWrite(V4, dist);
+
+    Serial.printf("✅ LDR: %.0f%%  MQ2: %d  Distance: %.1fcm\n", ldrPercent, mq2Raw, dist);
+  }
+}
